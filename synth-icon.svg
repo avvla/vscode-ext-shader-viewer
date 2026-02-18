@@ -1,0 +1,39 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7b2cbf;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" rx="16" fill="#1e1e1e"/>
+  
+  <!-- Piano keys at bottom -->
+  <g>
+    <!-- White keys -->
+    <rect x="16" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <rect x="30" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <rect x="44" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <rect x="58" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <rect x="72" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <rect x="86" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    <rect x="100" y="78" width="14" height="36" rx="1" fill="#ffffff" stroke="#333333" stroke-width="0.5"/>
+    
+    <!-- Black keys -->
+    <rect x="25" y="78" width="10" height="22" rx="1" fill="#000000"/>
+    <rect x="39" y="78" width="10" height="22" rx="1" fill="#000000"/>
+    <rect x="67" y="78" width="10" height="22" rx="1" fill="#000000"/>
+    <rect x="81" y="78" width="10" height="22" rx="1" fill="#000000"/>
+    <rect x="95" y="78" width="10" height="22" rx="1" fill="#000000"/>
+  </g>
+  
+  <!-- Waveform - realistic sine/synth wave -->
+  <path d="M 12,50 L 16,50 L 18,44 L 20,36 L 22,28 L 24,22 L 26,18 L 28,16 L 30,16 L 32,18 L 34,22 L 36,28 L 38,36 L 40,44 L 42,50 L 44,56 L 46,60 L 48,62 L 50,62 L 52,60 L 54,56 L 56,50 L 58,44 L 60,36 L 62,28 L 64,22 L 66,18 L 68,16 L 70,16 L 72,18 L 74,22 L 76,28 L 78,36 L 80,44 L 82,50 L 84,56 L 86,60 L 88,62 L 90,62 L 92,60 L 94,56 L 96,50 L 98,44 L 100,36 L 102,28 L 104,22 L 106,18 L 108,16 L 110,16 L 112,18 L 114,22 L 116,28" 
+        stroke="url(#waveGradient)" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>

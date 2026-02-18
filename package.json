@@ -1,0 +1,76 @@
+{
+  "name": "visual-synth-shader-viewer",
+  "displayName": "Visual Synth Shader Viewer",
+  "description": "Preview and debug Visual Synth 2 .frag shader files in VS Code",
+  "version": "0.1.0",
+  "icon": "synth-icon.png",
+  "publisher": "Avvla",
+  "author": {
+    "name": "Lisa Wagner",
+    "url": "https://github.com/avvla"
+  },
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/avvla/vscode-ext-shader-viewer.git"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Visualization",
+    "Debuggers"
+  ],
+  "activationEvents": [
+    "onLanguage:glsl"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "visualSynthShaderViewer.preview",
+        "title": "Preview Shader",
+        "icon": "$(open-preview)",
+        "category": "Visual Synth"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceExtname == .frag",
+          "command": "visualSynthShaderViewer.preview",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceExtname == .frag",
+          "command": "visualSynthShaderViewer.preview",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "visualSynthShaderViewer.preview",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "resourceExtname == .frag"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^5.x",
+    "@typescript-eslint/parser": "^5.x",
+    "eslint": "^8.x",
+    "typescript": "^5.0.0"
+  }
+}
