@@ -1,4 +1,4 @@
-# VS Code Visual Synth Shader Viewer Extension
+# Visual Synth Shader Viewer Extension
 
 A Visual Studio Code extension for previewing and debugging Visual Synth 2 fragment shader (.frag) files with live WebGL rendering.
 
