@@ -4,7 +4,7 @@ A Visual Studio Code extension for previewing and debugging Visual Synth 2 fragm
 
 ## Features
 
-- **Live Shader Preview**: Real-time WebGL rendering of your fragment shaders
+- **Live Shader Preview**: Real-time GPU rendering of your GLSL fragment shaders
 - **Parameter Controls**: Interactive sliders for custom shader parameters defined in JSON metadata
 - **Auto-Reload**: Automatically updates the preview when you save your shader file
 - **Color & Alpha Controls**: Adjust color and alpha values in real-time
