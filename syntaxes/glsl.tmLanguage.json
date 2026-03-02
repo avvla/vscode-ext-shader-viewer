@@ -1,0 +1,125 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "GLSL",
+    "scopeName": "source.glsl",
+    "fileTypes": ["glsl", "vert", "frag", "geom", "tesc", "tese", "comp"],
+    "patterns": [
+        { "include": "#comment-block" },
+        { "include": "#comment-line" },
+        { "include": "#preprocessor" },
+        { "include": "#keywords-control" },
+        { "include": "#qualifiers-storage" },
+        { "include": "#qualifiers-precision" },
+        { "include": "#types" },
+        { "include": "#builtin-variables" },
+        { "include": "#builtin-functions" },
+        { "include": "#constants-bool" },
+        { "include": "#numbers" },
+        { "include": "#operators" }
+    ],
+    "repository": {
+
+        "comment-line": {
+            "name": "comment.line.double-slash.glsl",
+            "match": "//.*$"
+        },
+
+        "comment-block": {
+            "name": "comment.block.glsl",
+            "begin": "/\\*",
+            "end": "\\*/",
+            "beginCaptures": { "0": { "name": "punctuation.definition.comment.begin.glsl" } },
+            "endCaptures":   { "0": { "name": "punctuation.definition.comment.end.glsl"   } }
+        },
+
+        "preprocessor": {
+            "name": "keyword.control.preprocessor.glsl",
+            "match": "^\\s*#\\s*(?:version|define|undef|if|ifdef|ifndef|else|elif|endif|error|pragma|extension|line)\\b.*$"
+        },
+
+        "keywords-control": {
+            "name": "keyword.control.glsl",
+            "match": "\\b(if|else|for|while|do|return|break|continue|discard|switch|case|default)\\b"
+        },
+
+        "qualifiers-storage": {
+            "name": "storage.modifier.glsl",
+            "match": "\\b(uniform|attribute|varying|in|out|inout|const|centroid|flat|smooth|layout|invariant|coherent|volatile|restrict|readonly|writeonly|shared|patch|sample|subroutine)\\b"
+        },
+
+        "qualifiers-precision": {
+            "name": "storage.modifier.precision.glsl",
+            "match": "\\b(precision|highp|mediump|lowp)\\b"
+        },
+
+        "types": {
+            "name": "storage.type.glsl",
+            "match": "\\b(void|bool|int|uint|float|double|struct|vec2|vec3|vec4|dvec2|dvec3|dvec4|bvec2|bvec3|bvec4|ivec2|ivec3|ivec4|uvec2|uvec3|uvec4|mat2|mat3|mat4|mat2x2|mat2x3|mat2x4|mat3x2|mat3x3|mat3x4|mat4x2|mat4x3|mat4x4|dmat2|dmat3|dmat4|dmat2x2|dmat2x3|dmat2x4|dmat3x2|dmat3x3|dmat3x4|dmat4x2|dmat4x3|dmat4x4|sampler2D|sampler3D|samplerCube|sampler2DShadow|samplerCubeShadow|sampler2DArray|sampler2DArrayShadow|isampler2D|isampler3D|isamplerCube|isampler2DArray|usampler2D|usampler3D|usamplerCube|usampler2DArray|sampler1D|sampler1DShadow|sampler1DArray|sampler1DArrayShadow|sampler2DRect|sampler2DRectShadow|samplerBuffer|sampler2DMS|sampler2DMSArray|isampler1D|isampler1DArray|isampler2DRect|isamplerBuffer|isampler2DMS|isampler2DMSArray|usampler1D|usampler1DArray|usampler2DRect|usamplerBuffer|usampler2DMS|usampler2DMSArray|image2D|iimage2D|uimage2D|image3D|iimage3D|uimage3D|imageCube|iimageCube|uimageCube|image2DArray|iimage2DArray|uimage2DArray|imageBuffer|iimageBuffer|uimageBuffer|atomic_uint)\\b"
+        },
+
+        "builtin-variables": {
+            "name": "variable.language.glsl",
+            "match": "\\b(gl_Position|gl_PointSize|gl_ClipDistance|gl_FragCoord|gl_FrontFacing|gl_FragDepth|gl_FragColor|gl_FragData|gl_PointCoord|gl_VertexID|gl_InstanceID|gl_PrimitiveID|gl_Layer|gl_ViewportIndex|gl_TessLevelOuter|gl_TessLevelInner|gl_TessCoord|gl_PatchVerticesIn|gl_InvocationID|gl_SampleID|gl_SamplePosition|gl_SampleMaskIn|gl_SampleMask|gl_NumWorkGroups|gl_WorkGroupSize|gl_WorkGroupID|gl_LocalInvocationID|gl_GlobalInvocationID|gl_LocalInvocationIndex)\\b"
+        },
+
+        "builtin-functions": {
+            "name": "support.function.glsl",
+            "match": "\\b(radians|degrees|sin|cos|tan|asin|acos|atan|sinh|cosh|tanh|asinh|acosh|atanh|pow|exp|log|exp2|log2|sqrt|inversesqrt|abs|sign|floor|trunc|round|roundEven|ceil|fract|mod|modf|min|max|clamp|mix|step|smoothstep|isnan|isinf|floatBitsToInt|floatBitsToUint|intBitsToFloat|uintBitsToFloat|packSnorm2x16|unpackSnorm2x16|packUnorm2x16|unpackUnorm2x16|packHalf2x16|unpackHalf2x16|length|distance|dot|cross|normalize|faceforward|reflect|refract|matrixCompMult|outerProduct|transpose|determinant|inverse|lessThan|lessThanEqual|greaterThan|greaterThanEqual|equal|notEqual|any|all|not|textureSize|texture|textureProj|textureLod|textureOffset|texelFetch|texelFetchOffset|textureProjOffset|textureLodOffset|textureProjLod|textureProjLodOffset|textureGrad|textureGradOffset|textureProjGrad|textureProjGradOffset|texture2D|texture2DProj|texture2DLod|texture2DProjLod|texture3D|texture3DProj|texture3DLod|texture3DProjLod|textureCube|textureCubeLod|shadow2D|shadow2DProj|dFdx|dFdy|fwidth|dFdxFine|dFdyFine|fwidthFine|dFdxCoarse|dFdyCoarse|fwidthCoarse|emitVertex|endPrimitive|barrier|memoryBarrier|memoryBarrierAtomicCounter|memoryBarrierBuffer|memoryBarrierShared|memoryBarrierImage|groupMemoryBarrier|atomicAdd|atomicMin|atomicMax|atomicAnd|atomicOr|atomicXor|atomicExchange|atomicCompSwap|imageSize|imageLoad|imageStore)\\b"
+        },
+
+        "constants-bool": {
+            "name": "constant.language.boolean.glsl",
+            "match": "\\b(true|false)\\b"
+        },
+
+        "numbers": {
+            "patterns": [
+                {
+                    "comment": "Float: 1.0  1.  1.0e5  1e5  (with optional f suffix)",
+                    "name": "constant.numeric.float.glsl",
+                    "match": "\\b\\d+\\.\\d*(?:[eE][+-]?\\d+)?[fF]?\\b|\\b\\d+[eE][+-]?\\d+[fF]?\\b"
+                },
+                {
+                    "comment": "Hex integer: 0xff  0xFF",
+                    "name": "constant.numeric.hex.glsl",
+                    "match": "\\b0[xX][0-9a-fA-F]+[uU]?\\b"
+                },
+                {
+                    "comment": "Decimal integer: 42  42u",
+                    "name": "constant.numeric.integer.glsl",
+                    "match": "\\b\\d+[uU]?\\b"
+                }
+            ]
+        },
+
+        "operators": {
+            "patterns": [
+                {
+                    "comment": "Compound assignment and increment/decrement (must precede single-char ops)",
+                    "name": "keyword.operator.assignment.glsl",
+                    "match": "\\+\\+|--|\\+=|-=|\\*=|/=|%=|<<=|>>=|&=|\\|=|\\^="
+                },
+                {
+                    "comment": "Comparison",
+                    "name": "keyword.operator.comparison.glsl",
+                    "match": "==|!=|<=|>=|<|>"
+                },
+                {
+                    "comment": "Logical",
+                    "name": "keyword.operator.logical.glsl",
+                    "match": "&&|\\|\\||\\^\\^|!"
+                },
+                {
+                    "comment": "Bitwise shift (before single < >)",
+                    "name": "keyword.operator.bitwise.glsl",
+                    "match": "<<|>>|[&|^~]"
+                },
+                {
+                    "comment": "Arithmetic and assignment",
+                    "name": "keyword.operator.arithmetic.glsl",
+                    "match": "[+\\-*/%]|(?<![=!<>])=(?!=)"
+                }
+            ]
+        }
+    }
+}

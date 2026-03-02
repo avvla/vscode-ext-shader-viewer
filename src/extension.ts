@@ -1,8 +1,11 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import { GlslDiagnosticProvider } from './diagnostics';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Visual Synth Shader Viewer is now active');
+
+    new GlslDiagnosticProvider().register(context);
 
     let disposable = vscode.commands.registerCommand('visualSynthShaderViewer.preview', () => {
         const editor = vscode.window.activeTextEditor;

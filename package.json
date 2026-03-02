@@ -2,7 +2,7 @@
   "name": "visual-synth-shader-viewer",
   "displayName": "Visual Synth Shader Viewer",
   "description": "Preview and debug Visual Synth 2 .frag shader files in VS Code",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "icon": "synth-icon.png",
   "publisher": "Avvla",
   "author": {
@@ -21,10 +21,25 @@
     "Debuggers"
   ],
   "activationEvents": [
-    "onLanguage:glsl"
+    "workspaceContains:**/*.frag"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "glsl",
+        "aliases": ["GLSL", "OpenGL Shading Language"],
+        "extensions": [".glsl", ".vert", ".frag", ".geom", ".tesc", ".tese", ".comp"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "glsl",
+        "scopeName": "source.glsl",
+        "path": "./syntaxes/glsl.tmLanguage.json"
+      }
+    ],
     "commands": [
       {
         "command": "visualSynthShaderViewer.preview",
@@ -56,7 +71,17 @@
         "mac": "cmd+shift+v",
         "when": "resourceExtname == .frag"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Visual Synth Shader Viewer",
+      "properties": {
+        "visualSynthShaderViewer.glslangValidatorPath": {
+          "type": "string",
+          "default": "glslangValidator",
+          "description": "Path to the glslangValidator executable used for GLSL linting. Defaults to 'glslangValidator' (assumes it is on your system PATH via the Vulkan SDK). Set to a full path if needed, e.g. 'C:/VulkanSDK/1.3.x/Bin/glslangValidator.exe'."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

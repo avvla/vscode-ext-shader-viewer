@@ -11,6 +11,8 @@ A Visual Studio Code extension for previewing and debugging Visual Synth 2 fragm
 - **Playback Controls**: Play/pause and reset the shader animation
 - **FPS Counter**: Monitor shader performance
 - **Error Display**: Clear error messages for shader compilation issues
+- **Syntax Highlighting**: Full GLSL colorization — types, builtin functions and variables, keywords, qualifiers, operators, preprocessor directives, and comments
+- **VS2-Aware Linting**: Inline error diagnostics via `glslangValidator` with full knowledge of Visual Synth 2's runtime uniforms (`time`, `resolution`, `color`, `alpha`, `texCoord`, `fragColor`) — no false positives for VS2 shaders
 
 ## Installation
 
@@ -132,6 +134,7 @@ npm run compile
 
 - Visual Studio Code 1.75.0 or higher
 - WebGL-capable browser engine (included in VS Code)
+- `glslangValidator` on your system PATH for linting (optional — ships with the [Vulkan SDK](https://vulkan.lunarg.com/sdk/home)); configure a custom path via `visualSynthShaderViewer.glslangValidatorPath` if needed
 
 ## License
 
