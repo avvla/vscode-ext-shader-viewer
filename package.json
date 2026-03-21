@@ -4,6 +4,7 @@
   "description": "Preview and debug Visual Synth 2 .frag shader files in VS Code",
   "version": "0.2.0",
   "icon": "synth-icon.png",
+  "license": "MIT",
   "publisher": "Avvla",
   "author": {
     "name": "Lisa Wagner",
