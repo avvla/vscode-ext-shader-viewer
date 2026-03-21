@@ -1,6 +1,6 @@
 # Visual Synth Shader Viewer Extension
 
-A Visual Studio Code extension for previewing and debugging Visual Synth 2 fragment shader (.frag) files with live WebGL rendering.
+A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2 fragment shader (.frag) files with live WebGL rendering.
 
 ## Features
 
@@ -142,4 +142,4 @@ MIT
 
 ## Author
 Lisa Wagner (@avvla.music)
-Created for Visual Synth 2 shader development workflow.
+Created for [Visual Synthesizer 2](https://www.imaginando.pt/products/vs-visual-synthesizer) shader development workflow.
