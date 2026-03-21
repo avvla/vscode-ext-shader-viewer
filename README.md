@@ -142,5 +142,5 @@ MIT
 
 ## Author
 Lisa Wagner (@avvla.music)
-Created for [Visual Synthesizer 2](https://www.imaginando.pt/products/vs-visual-synthesizer) shader development workflow.
+Created for [Visual Synthesizer 2](https://www.imaginando.pt/products/vs-visual-synthesizer) shader development workflow.  
 *Disclaimer:* This extension is an independent community tool not affiliated with or endorsed by Imaginando, makers of Visual Synthesizer 2.
