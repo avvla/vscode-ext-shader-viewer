@@ -36,7 +36,7 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 
 1. Open any `.frag` shader file in VS Code
 2. Use one of these methods to preview:
-   - Right-click in the editor and select "Preview Shader"
+   - Right-click in the editor and select "Visual Synth: Preview Shader"
    - Click the preview icon in the editor title bar
    - Press `Ctrl+Shift+V` (or `Cmd+Shift+V` on Mac)
    - Open the command palette (`Ctrl+Shift+P`) and run "Visual Synth: Preview Shader"
