@@ -2,6 +2,17 @@
 
 All notable changes to the Visual Synth Shader Viewer extension will be documented in this file.
 
+## [0.2.1] - 2026-04-30
+
+### Changed
+- Renamed command title to "Visual Synth: Preview Shader" for consistency across the context menu and command palette
+- Clarified "custom uniforms" wording in the Troubleshooting section of README
+- Removed WebGL references from README description and Requirements section
+- Added CLI install option (`code --install-extension`) to the From VSIX installation section
+
+### Removed
+- `VULKAN_COMPATIBILITY.md` from the repository (kept as local reference only)
+
 ## [0.2.0] - 2026-03-01
 
 ### Added
