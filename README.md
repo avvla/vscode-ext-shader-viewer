@@ -1,6 +1,6 @@
 # Visual Synth Shader Viewer Extension
 
-A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2 fragment shader (.frag) files with live WebGL rendering.
+A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2 fragment shader (.frag) files.
 
 ## Features
 
@@ -135,7 +135,6 @@ npm run compile
 ## Requirements
 
 - Visual Studio Code 1.75.0 or higher
-- WebGL-capable browser engine (included in VS Code)
 - `glslangValidator` on your system PATH for linting (optional — ships with the [Vulkan SDK](https://vulkan.lunarg.com/sdk/home)); configure a custom path via `visualSynthShaderViewer.glslangValidatorPath` if needed
 
 ## License
