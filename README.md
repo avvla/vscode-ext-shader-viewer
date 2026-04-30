@@ -28,7 +28,9 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 
 1. Build the extension: `npm run vscode:prepublish`
 2. Package it: `vsce package` (requires `npm install -g @vscode/vsce`)
-3. Install the `.vsix` file: Extensions → ⋯ → Install from VSIX
+3. Install the `.vsix` file:
+   - **GUI**: Extensions → ⋯ → Install from VSIX
+   - **CLI**: `code --install-extension path/to/your-extension.vsix`
 
 ## Usage
 
