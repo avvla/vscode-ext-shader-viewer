@@ -103,7 +103,7 @@ The extension automatically provides these uniforms (matching Visual Synth 2):
 ### Shader doesn't render
 - Check the error message displayed in the preview panel
 - Ensure your shader has a valid `main()` function
-- Verify that all uniforms are correctly declared
+- Verify that all custom uniforms are correctly declared
 
 ### Parameters don't appear
 - Make sure your JSON metadata is properly formatted
