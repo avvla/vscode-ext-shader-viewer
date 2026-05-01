@@ -1,7 +1,7 @@
 {
   "name": "visual-synth-shader-viewer",
   "displayName": "Visual Synth Shader Viewer",
-  "description": "Preview and debug Visual Synth 2 .frag shader files in VS Code",
+  "description": "Preview and debug Visual Synthesizer 2 .frag shader files in VS Code",
   "version": "0.2.1",
   "icon": "synth-icon.png",
   "license": "MIT",
