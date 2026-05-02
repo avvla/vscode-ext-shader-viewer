@@ -4,7 +4,7 @@
 
 1. **Navigate to the extension directory:**
    ```bash
-   cd d:\Your-Proj-Dir\vscode-shader-viewer
+   cd path/to/vscode-ext-shader-viewer
    ```
 
 2. **Install dependencies:**
@@ -38,7 +38,7 @@ vsce package
 **Install the packaged extension:**
 ```bash
 # Option 1: Command line
-code --install-extension visual-synth-shader-viewer-0.1.0.vsix
+code --install-extension visual-synth-shader-viewer-x.x.x.vsix
 
 # Option 2: VS Code GUI
 # - Open VS Code
@@ -57,18 +57,18 @@ npm run compile
 vsce package
 
 # 3. Install in VS Code
-code --install-extension visual-synth-shader-viewer-0.1.0.vsix
+code --install-extension visual-synth-shader-viewer-x.x.x.vsix
 ```
 
 ## Testing the Extension
 
 ### Method 1: Debug Mode (Recommended for Development)
 
-1. Open the `vscode-shader-viewer` folder in VS Code
+1. Open the `vscode-ext-shader-viewer` folder in VS Code
 2. Press `F5` - this will:
    - Compile the extension
    - Open a new VS Code window with the extension loaded
-3. In the new window, open your shader file (e.g., `Octagrams.frag`)
+3. In the new window, open your shader file (e.g., `MyShader.frag`)
 4. Press `Ctrl+Shift+V` or click the preview icon in the editor toolbar
 
 ### Method 2: Install as VSIX
@@ -84,7 +84,7 @@ code --install-extension visual-synth-shader-viewer-0.1.0.vsix
    ```
 
 3. Install the generated `.vsix` file:
-   - In VS Code: Extensions → ⋯ (More Actions) → Install from VSIX
+   - In VS Code: Extensions → ⋯ → Install from VSIX
    - Select the `.vsix` file
 
 ## Using the Preview
@@ -94,7 +94,7 @@ Once you open a `.frag` file:
 1. **Open Preview:**
    - Click the preview icon (top right of editor)
    - Or press `Ctrl+Shift+V`
-   - Or right-click → "Preview Shader"
+   - Or right-click → "Visual Synth: Preview Shader"
 
 2. **Controls:**
    - **Play/Pause**: Freeze/resume animation
@@ -120,7 +120,7 @@ Once you open a `.frag` file:
 **Shader compilation error**
 - Error messages will appear in the preview panel
 - Check your GLSL syntax
-- Ensure all uniforms are properly declared
+- Ensure all custom uniforms are properly declared
 
 **Changes don't update**
 - Save the file (`Ctrl+S`)
