@@ -9,6 +9,7 @@ All notable changes to the Visual Synth Shader Viewer extension will be document
 - Clarified "custom uniforms" wording in the Troubleshooting section of README
 - Removed WebGL references from README description and Requirements section
 - Added CLI install option (`code --install-extension`) to the From VSIX installation section
+- Minor consistency and accuracy updates to `README.md` and `QUICKSTART.md`
 
 ### Removed
 - `VULKAN_COMPATIBILITY.md` from the repository (kept as local reference only)
