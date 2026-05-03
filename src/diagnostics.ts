@@ -15,8 +15,8 @@ const VS2_UNIFORMS = [
     'uniform vec2 resolution;',
     'uniform vec4 color;',
     'uniform float alpha;',
-    'varying vec2 texCoord;',
-    '#define fragColor gl_FragColor',
+    'in vec2 texCoord;',
+    'out vec4 fragColor;',
 ];
 
 export class GlslDiagnosticProvider {
@@ -94,18 +94,18 @@ export class GlslDiagnosticProvider {
     /**
      * Build the patched source by injecting VS2 uniforms at the right position.
      *
-     * The preamble must land AFTER any `precision` declarations (required by GLSL ES 1.00
-     * before float variables can be declared). We scan past the entire "setup section":
+     * The preamble must land AFTER any `precision` declarations (required before
+     * float variables can be declared). We scan past the entire "setup section":
      * the JSON comment block, #version, #ifdef GL_ES / precision / #endif, leading
      * blank lines and // comments — then insert the preamble immediately after.
      *
-     * If no #version is present we prepend "#version 100" before everything.
+     * If no #version is present we prepend "#version 300 es" before everything.
      */
     private buildPatchedSource(source: string, customParams: string[]): {
         patchedSource: string;
         preambleStart: number;       // 1-indexed line in patched source where preamble begins
         preambleCount: number;       // number of injected preamble lines
-        versionLinesAdded: number;   // 1 if we prepended #version 100, else 0
+        versionLinesAdded: number;   // 1 if we prepended #version 300 es, else 0
     } {
         const preambleLines = [
             ...VS2_UNIFORMS,
@@ -162,7 +162,7 @@ export class GlslDiagnosticProvider {
         const patchedLines: string[] = [];
 
         if (!hasVersion) {
-            patchedLines.push('#version 100');
+            patchedLines.push('#version 300 es');
         }
         for (let i = 0; i <= setupEnd; i++) {
             patchedLines.push(srcLines[i]);
@@ -190,7 +190,7 @@ export class GlslDiagnosticProvider {
      * Parse glslangValidator output and map line numbers back to the original document.
      *
      * Patched file layout:
-     *   lines 1 .. versionLinesAdded              → added #version 100 (if any)
+     *   lines 1 .. versionLinesAdded              → added #version 300 es (if any)
      *   lines vL+1 .. vL+setupEnd+1               → original setup lines (same as original)
      *   lines preambleStart .. preambleStart+P-1  → injected preamble (skip these)
      *   lines preambleStart+P ..                  → original code lines (shift by P + vL)
@@ -224,6 +224,10 @@ export class GlslDiagnosticProvider {
 
             // Skip diagnostics that land inside the injected preamble
             if (patchedLine >= preambleStart && patchedLine <= preambleEnd) continue;
+
+            // Suppress false positives from GLSL ES 3.00 strictness on global initializers —
+            // VS2 shaders legitimately initialize globals from uniforms and other globals.
+            if (message.includes('global variable initializers')) continue;
 
             // Map patched line → original document line (1-indexed)
             const origLine1 = patchedLine < preambleStart

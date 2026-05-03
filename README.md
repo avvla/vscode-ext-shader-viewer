@@ -14,6 +14,8 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 - **Syntax Highlighting**: Full GLSL colorization — types, builtin functions and variables, keywords, qualifiers, operators, preprocessor directives, and comments
 - **VS2-Aware Linting**: Inline error diagnostics via `glslangValidator` with full knowledge of Visual Synth 2's runtime uniforms (`time`, `resolution`, `color`, `alpha`, `texCoord`, `fragColor`) — no false positives for VS2 shaders
 
+![Visual Synth Shader Viewer Preview](assets/Visual-Synth-Shader-Viewer-Ext-Preview.gif)
+
 ## Installation
 
 ### From Source

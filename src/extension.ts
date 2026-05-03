@@ -239,10 +239,17 @@ class ShaderPreviewPanel {
                 <label>Color:</label>
                 <input type="color" id="color" value="#ffffff">
             </div>
-            <div class="control-group">
-                <label>Alpha:</label>
-                <input type="range" id="alpha" min="0" max="1" step="0.01" value="1">
-                <span class="value" id="alphaValue">1.00</span>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <div class="control-group">
+                    <label>Alpha:</label>
+                    <input type="range" id="alpha" min="0" max="1" step="0.01" value="1">
+                    <span class="value" id="alphaValue">1.00</span>
+                </div>
+                <div class="control-group">
+                    <label>Speed:</label>
+                    <input type="range" id="speed" min="0" max="5" step="0.05" value="1">
+                    <span class="value" id="speedValue">1.00</span>
+                </div>
             </div>
             <div id="customControls"></div>
         </div>
@@ -260,7 +267,7 @@ class ShaderPreviewPanel {
         const vscode = acquireVsCodeApi();
 
         const canvas = document.getElementById('glCanvas');
-        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+        const gl = canvas.getContext('webgl2', { premultipliedAlpha: false }) || canvas.getContext('webgl', { premultipliedAlpha: false });
 
         if (!gl) {
             showError('WebGL not supported in your browser');
@@ -272,13 +279,14 @@ class ShaderPreviewPanel {
         let program;
         let uniforms = {};
         let animationId;
-        let startTime = Date.now();
+        let accumulatedTime = 0;
+        let lastRenderTime = Date.now();
         let isPaused = false;
-        let pausedTime = 0;
 
         // Shader parameters
         let shaderParams = {
             time: 0,
+            speed: 1.0,
             color: { r: 1.0, g: 1.0, b: 1.0 },
             alpha: 1.0
         };
@@ -291,9 +299,9 @@ class ShaderPreviewPanel {
         }
 
         // Vertex shader (standard quad)
-        const vertexShaderSource = \`#version 100
-            attribute vec2 position;
-            varying vec2 texCoord;
+        const vertexShaderSource = \`#version 300 es
+            in vec2 position;
+            out vec2 texCoord;
             void main() {
                 texCoord = position * 0.5 + 0.5;
                 gl_Position = vec4(position, 0.0, 1.0);
@@ -329,9 +337,45 @@ class ShaderPreviewPanel {
             return program;
         }
 
+        function isPureLiteral(expr) {
+            const noTypes = expr.replace(/\\b(vec[234]|mat[2-4]|float|int|bool|true|false)\\b/g, '');
+            return !/[a-zA-Z_]/.test(noTypes);
+        }
+
+        // GLSL ES 3.00 requires global initializers to be constant expressions.
+        // VS2 shaders commonly initialize globals from uniforms or other globals.
+        // We lift these initializations to the top of main() where they are valid.
+        function liftGlobalInitializers(source) {
+            const lines = source.split('\\n');
+            let braceDepth = 0;
+            const liftedInits = [];
+            const outLines = [];
+            for (const line of lines) {
+                const isGlobalScope = braceDepth === 0;
+                for (const ch of line) {
+                    if (ch === '{') braceDepth++;
+                    else if (ch === '}') braceDepth--;
+                }
+                if (isGlobalScope) {
+                    const m = line.match(/^(\\s*(?:float|vec[234]|mat[2-4]|int|bool)\\s+(\\w+))\\s*=\\s*([^;]+)\\s*;/);
+                    if (m && !isPureLiteral(m[3])) {
+                        liftedInits.push('    ' + m[2] + ' = ' + m[3].trim() + ';');
+                        outLines.push(m[1] + ';');
+                        continue;
+                    }
+                }
+                outLines.push(line);
+            }
+            if (liftedInits.length === 0) return source;
+            return outLines.join('\\n').replace(
+                /void\\s+main\\s*\\(\\s*\\)\\s*\\{/,
+                'void main() {\\n' + liftedInits.join('\\n')
+            );
+        }
+
         function prepareVulkanShaderForWebGL(source) {
             // VS2/Vulkan shaders don't declare uniforms - we need to inject them for WebGL
-            let fragSource = source;
+            let fragSource = liftGlobalInitializers(source);
 
             // Build uniform declarations for VS2 standard uniforms
             let uniformDeclarations = \`
@@ -340,7 +384,8 @@ uniform float time;
 uniform vec2 resolution;
 uniform vec4 color;
 uniform float alpha;
-varying vec2 texCoord;
+in vec2 texCoord;
+out vec4 fragColor;
 \`;
 
             // Add custom parameter uniforms
@@ -349,9 +394,6 @@ varying vec2 texCoord;
                     uniformDeclarations += \`uniform float \${param.name};\\n\`;
                 });
             }
-
-            // Replace fragColor with gl_FragColor for WebGL
-            fragSource = fragSource.replace(/\\bfragColor\\b/g, 'gl_FragColor');
 
             // Find where to inject uniforms (after precision, before first function/global var)
             // Look for the end of precision statement or #ifdef blocks
@@ -386,12 +428,12 @@ varying vec2 texCoord;
 
                 // Add version directive if not present
                 if (!fragSource.includes('#version')) {
-                    fragSource = '#version 100\\n' + fragSource;
+                    fragSource = '#version 300 es\\n' + fragSource;
                 }
 
                 // Ensure precision is set
                 if (!fragSource.match(/precision\\s+\\w+\\s+float/)) {
-                    fragSource = fragSource.replace('#version 100', '#version 100\\nprecision highp float;');
+                    fragSource = fragSource.replace('#version 300 es', '#version 300 es\\nprecision highp float;');
                 }
 
                 const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
@@ -460,19 +502,21 @@ varying vec2 texCoord;
         let fps = 0;
 
         function render() {
+            const now = Date.now();
             if (!isPaused) {
-                const currentTime = Date.now();
+                const delta = (now - lastRenderTime) / 1000.0;
+                accumulatedTime += delta * shaderParams.speed;
+                shaderParams.time = accumulatedTime;
                 frameCount++;
 
-                if (currentTime - lastFrameTime >= 1000) {
+                if (now - lastFrameTime >= 1000) {
                     fps = frameCount;
                     frameCount = 0;
-                    lastFrameTime = currentTime;
+                    lastFrameTime = now;
                     document.getElementById('fps').textContent = \`FPS: \${fps}\`;
                 }
-
-                shaderParams.time = (currentTime - startTime) / 1000.0;
             }
+            lastRenderTime = now;
 
             resizeCanvas();
 
@@ -531,18 +575,18 @@ varying vec2 texCoord;
 
         document.getElementById('playPause').addEventListener('click', (e) => {
             isPaused = !isPaused;
-            if (isPaused) {
-                pausedTime = shaderParams.time;
-                e.target.textContent = '▶ Play';
-            } else {
-                startTime = Date.now() - (pausedTime * 1000);
-                e.target.textContent = '⏸ Pause';
-            }
+            e.target.textContent = isPaused ? '▶ Play' : '⏸ Pause';
         });
 
         document.getElementById('reset').addEventListener('click', () => {
-            startTime = Date.now();
+            accumulatedTime = 0;
+            lastRenderTime = Date.now();
             shaderParams.time = 0;
+        });
+
+        document.getElementById('speed').addEventListener('input', (e) => {
+            shaderParams.speed = parseFloat(e.target.value);
+            document.getElementById('speedValue').textContent = shaderParams.speed.toFixed(2);
         });
 
         // Create custom parameter controls
@@ -558,10 +602,12 @@ varying vec2 texCoord;
 
                 const input = document.createElement('input');
                 input.type = 'range';
-                input.min = param.min || 0;
-                input.max = param.max || 1;
-                input.step = (param.max - param.min) / 100;
-                input.value = param.default || 0;
+                const minVal = param.min ?? 0;
+                const maxVal = param.max ?? 1;
+                input.min = minVal;
+                input.max = maxVal;
+                input.step = (maxVal - minVal) / 100;
+                input.value = param.default ?? 0;
                 input.addEventListener('input', (e) => {
                     shaderParams[param.name] = parseFloat(e.target.value);
                     valueSpan.textContent = parseFloat(e.target.value).toFixed(2);

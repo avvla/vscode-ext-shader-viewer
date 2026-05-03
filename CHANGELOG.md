@@ -2,6 +2,21 @@
 
 All notable changes to the Visual Synth Shader Viewer extension will be documented in this file.
 
+## [0.2.2] - 2026-05-02
+
+### Fixed
+- Shader preview now compiles using GLSL ES 3.00 (`#version 300 es` / WebGL 2) instead of GLSL ES 1.00. This resolves compilation failures in shaders that use non-constant loop bounds (e.g. a `for` loop driven by a custom parameter uniform), which VS2 exports legally for its Vulkan pipeline but WebGL 1.0 rejects at compile time.
+- Global variable declarations initialized from uniforms or other globals (e.g. `float x = myUniform;`) are now automatically lifted to the top of `main()` at preview time. GLSL ES 3.00 requires global initializers to be constant expressions; VS2 shaders use this pattern routinely and it is handled transparently without modifying the source file.
+- Parameter sliders for VS2-exported shaders now move smoothly across their full range. Parameters without explicit `min`/`max` values in the JSON metadata were producing a `NaN` step size, causing the slider to snap only to 0 or 1.
+- Alpha slider now correctly affects shader opacity. The WebGL context was created with `premultipliedAlpha: true` (the default), which causes the compositing math to cancel out the alpha channel entirely over a black background. Switching to `premultipliedAlpha: false` makes alpha correctly scale the output brightness.
+
+### Added
+- **Speed control** — a Speed slider (0–5×, default 1.00) is now shown in the preview controls for all shaders, matching the global Speed parameter available in Visual Synthesizer 2. It scales how fast the `time` uniform advances and can be adjusted mid-playback without causing discontinuities.
+
+### Changed
+- GLSL linting preamble updated to match GLSL ES 3.00: `varying` replaced with `in`, `gl_FragColor` macro replaced with an `out vec4 fragColor` declaration. The linter now validates shaders under the same GLSL version the preview compiles them with, eliminating false-positive warnings on global uniform initializers and dynamic loop bounds in VS2 shaders.
+- Linter no longer reports `global variable initializers must be constant expressions` as an error, as this is a false positive for VS2 shaders where the preview handles the pattern via automatic lifting.
+
 ## [0.2.1] - 2026-04-30
 
 ### Changed
