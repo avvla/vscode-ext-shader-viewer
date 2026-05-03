@@ -12,7 +12,7 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 - **FPS Counter**: Monitor shader performance
 - **Error Display**: Clear error messages for shader compilation issues
 - **Syntax Highlighting**: Full GLSL colorization — types, builtin functions and variables, keywords, qualifiers, operators, preprocessor directives, and comments
-- **VS2-Aware Linting**: Inline error diagnostics via `glslangValidator` with full knowledge of Visual Synth 2's runtime uniforms (`time`, `resolution`, `color`, `alpha`, `texCoord`, `fragColor`) — no false positives for VS2 shaders
+- **VS2-Aware Linting**: Inline error diagnostics via `glslangValidator` with full knowledge of Visual Synthesizer 2's runtime uniforms (`time`, `resolution`, `color`, `alpha`, `texCoord`, `fragColor`) — no false positives for VS2 shaders
 
 ![Visual Synth Shader Viewer Preview](https://raw.githubusercontent.com/avvla/vscode-ext-shader-viewer/main/assets/Visual-Synth-Shader-Viewer-Ext-Preview.gif)
 
@@ -51,7 +51,7 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 
 ## Shader Format
 
-The extension expects Visual Synth 2 compatible shaders with JSON metadata:
+The extension expects Visual Synthesizer 2 compatible shaders with JSON metadata:
 
 ```glsl
 /*
@@ -87,7 +87,7 @@ void main() {
 
 ## Available Uniforms
 
-The extension automatically provides these uniforms (matching Visual Synth 2):
+The extension automatically provides these uniforms (matching Visual Synthesizer 2):
 
 - `float time` - Current time in seconds
 - `vec2 resolution` - Canvas resolution in pixels
