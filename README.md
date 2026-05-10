@@ -32,7 +32,7 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 2. Package it: `vsce package` (requires `npm install -g @vscode/vsce`)
 3. Install the `.vsix` file:
    - **GUI**: Extensions → ⋯ → Install from VSIX
-   - **CLI**: `code --install-extension visual-synth-shader-viewer-x.x.x.vsix`
+   - **CLI**: `code --install-extension visual-synthesizer-shader-viewer-x.x.x.vsix`
 
 ## Usage
 

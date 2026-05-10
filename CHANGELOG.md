@@ -2,6 +2,11 @@
 
 All notable changes to the Visual Synth Shader Viewer extension will be documented in this file.
 
+## [0.2.3] - 2026-05-09
+
+### Changed
+- Renamed extension ID to `visual-synthesizer-shader-viewer` for Marketplace republish.
+
 ## [0.2.2] - 2026-05-02
 
 ### Fixed
