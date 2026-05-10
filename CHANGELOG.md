@@ -2,6 +2,11 @@
 
 All notable changes to the Visual Synthesizer Shader Viewer extension will be documented in this file.
 
+## [0.2.4] - 2026-05-09
+
+### Changed
+- Added Marketplace keywords: shader, visual synthesizer, viewer, fragment, GLSL.
+
 ## [0.2.3] - 2026-05-09
 
 ### Changed
