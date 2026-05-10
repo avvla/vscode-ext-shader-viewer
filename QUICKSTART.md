@@ -38,7 +38,7 @@ vsce package
 **Install the packaged extension:**
 ```bash
 # Option 1: Command line
-code --install-extension visual-synth-shader-viewer-x.x.x.vsix
+code --install-extension visual-synthesizer-shader-viewer-x.x.x.vsix
 
 # Option 2: VS Code GUI
 # - Open VS Code
@@ -57,7 +57,7 @@ npm run compile
 vsce package
 
 # 3. Install in VS Code
-code --install-extension visual-synth-shader-viewer-x.x.x.vsix
+code --install-extension visual-synthesizer-shader-viewer-x.x.x.vsix
 ```
 
 ## Testing the Extension
@@ -115,7 +115,7 @@ Once you open a `.frag` file:
 
 **Preview doesn't open**
 - Make sure the file has a `.frag` extension
-- Check VS Code's Output panel (View → Output → Visual Synth Shader Viewer)
+- Check VS Code's Output panel (View → Output → Visual Synthesizer Shader Viewer)
 
 **Shader compilation error**
 - Error messages will appear in the preview panel

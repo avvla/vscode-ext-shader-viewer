@@ -1,6 +1,6 @@
 {
   "name": "visual-synthesizer-shader-viewer",
-  "displayName": "Visual Synth Shader Viewer",
+  "displayName": "Visual Synthesizer Shader Viewer",
   "description": "Preview and debug Visual Synthesizer 2 .frag shader files in VS Code",
   "version": "0.2.3",
   "icon": "assets/synth-icon.png",
@@ -73,7 +73,7 @@
       }
     ],
     "configuration": {
-      "title": "Visual Synth Shader Viewer",
+      "title": "Visual Synthesizer Shader Viewer",
       "properties": {
         "visualSynthShaderViewer.glslangValidatorPath": {
           "type": "string",

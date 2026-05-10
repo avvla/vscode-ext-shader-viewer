@@ -3,7 +3,7 @@ import * as path from 'path';
 import { GlslDiagnosticProvider } from './diagnostics';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Visual Synth Shader Viewer is now active');
+    console.log('Visual Synthesizer Shader Viewer is now active');
 
     new GlslDiagnosticProvider().register(context);
 
