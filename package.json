@@ -17,6 +17,7 @@
   "engines": {
     "vscode": "^1.75.0"
   },
+  "keywords": ["shader", "visual synthesizer", "viewer", "fragment", "GLSL"],
   "categories": [
     "Visualization",
     "Debuggers"
