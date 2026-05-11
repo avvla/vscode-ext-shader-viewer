@@ -16,24 +16,6 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 
 ![Visual Synth Shader Viewer Preview](https://raw.githubusercontent.com/avvla/vscode-ext-shader-viewer/main/assets/Visual-Synth-Shader-Viewer-Ext-Preview.gif)
 
-## Installation
-
-### From Source
-
-1. Clone or download this repository
-2. Open the folder in VS Code
-3. Run `npm install` to install dependencies
-4. Run `npm run compile` to build the extension
-5. Press `F5` to open a new VS Code window with the extension loaded
-
-### From VSIX
-
-1. Build the extension: `npm run vscode:prepublish`
-2. Package it: `vsce package` (requires `npm install -g @vscode/vsce`)
-3. Install the `.vsix` file:
-   - **GUI**: Extensions → ⋯ → Install from VSIX
-   - **CLI**: `code --install-extension visual-synthesizer-shader-viewer-x.x.x.vsix`
-
 ## Usage
 
 1. Open any `.frag` shader file in VS Code
@@ -48,6 +30,29 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
    - Interactive controls for all parameters
    - Play/pause and reset buttons
    - FPS counter
+
+## Installation
+
+### From VS Code Marketplace
+
+1. Open VS Code and go to the Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X` on Mac)
+2. Search for **Visual Synthesizer Shader Viewer**
+3. Click **Install**
+
+### From VSIX
+
+1. Download the `.vsix` file from the [GitHub Releases](https://github.com/avvla/vscode-ext-shader-viewer/releases) page
+2. Install it:
+   - **GUI**: Extensions → ⋯ → Install from VSIX
+   - **CLI**: `code --install-extension visual-synthesizer-shader-viewer-x.x.x.vsix`
+
+### From Source
+
+1. Clone or download this repository
+2. Open the folder in VS Code
+3. Run `npm install` to install dependencies
+4. Run `npm run compile` to build the extension
+5. Press `F5` to open a new VS Code window with the extension loaded
 
 ## Shader Format
 

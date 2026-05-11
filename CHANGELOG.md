@@ -2,6 +2,11 @@
 
 All notable changes to the Visual Synthesizer Shader Viewer extension will be documented in this file.
 
+## [0.2.5] - 2026-05-10
+
+### Changed
+- Reorganized README: Usage section moved above Installation; Installation section now leads with VS Code Marketplace as the primary install method, followed by From VSIX (linking to GitHub Releases), then From Source for developers.
+
 ## [0.2.4] - 2026-05-09
 
 ### Changed
