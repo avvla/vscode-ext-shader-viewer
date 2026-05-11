@@ -41,7 +41,12 @@ A Visual Studio Code extension for previewing and debugging Visual Synthesizer 2
 
 ### From VSIX
 
-1. Download the `.vsix` file from the [GitHub Releases](https://github.com/avvla/vscode-ext-shader-viewer/releases) page
+1. Clone the [repository](https://github.com/avvla/vscode-ext-shader-viewer) and build the `.vsix` file:
+   ```bash
+   npm install
+   npm install -g @vscode/vsce
+   vsce package
+   ```
 2. Install it:
    - **GUI**: Extensions → ⋯ → Install from VSIX
    - **CLI**: `code --install-extension visual-synthesizer-shader-viewer-x.x.x.vsix`
